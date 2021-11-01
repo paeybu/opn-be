@@ -3,12 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PatientsModule } from './patients/patients.module';
-
+import { ConfigModule } from '@nestjs/config';
+ConfigModule.forRoot();
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://opn:vvooNAtq0Q3p9tQc@cluster0.uhdos.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRoot(process.env.DB_CONNECTION_STRING),
     PatientsModule,
   ],
   controllers: [AppController],
